@@ -1,15 +1,11 @@
 import { User, BaseUser } from '../models/User';
 
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-const API_KEY = process.env.REACT_APP_API_KEY || 'default';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
 export const fetchUsers = async (): Promise<BaseUser[]> => {
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/users`, {
+        const response = await fetch(`${BASE_URL}/users`, {
             method: 'GET',
-            headers: {
-                'API-KEY': API_KEY
-            }
         });
 
         if (!response.ok) {
@@ -26,11 +22,8 @@ export const fetchUsers = async (): Promise<BaseUser[]> => {
 
 export const fetchUser = async (id: number): Promise<User> => {
     try {
-        const response = await fetch(`${BASE_URL}/api/users/${id}`, {
+        const response = await fetch(`${BASE_URL}/users/${id}`, {
             method: 'GET',
-            headers: {
-                'API-KEY': API_KEY
-            }
         });
 
         if (!response.ok) {
@@ -47,11 +40,10 @@ export const fetchUser = async (id: number): Promise<User> => {
 
 export const createUser = async (user: User): Promise<BaseUser> => {
     try {
-        const response = await fetch(`${BASE_URL}/api/users`, {
+        const response = await fetch(`${BASE_URL}/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'API-KEY': API_KEY
             },
             body: JSON.stringify(user)
         });
@@ -70,11 +62,10 @@ export const createUser = async (user: User): Promise<BaseUser> => {
 
 export const updateUser = async (id: number, user: User): Promise<BaseUser> => {
     try {
-        const response = await fetch(`${BASE_URL}/api/users/${id}`, {
+        const response = await fetch(`${BASE_URL}/users/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'API-KEY': API_KEY
             },
             body: JSON.stringify(user)
         });
@@ -93,11 +84,8 @@ export const updateUser = async (id: number, user: User): Promise<BaseUser> => {
 
 export const deleteUser = async (id: number): Promise<void> => {
     try {
-        const response = await fetch(`${BASE_URL}/api/users/${id}`, {
+        const response = await fetch(`${BASE_URL}/users/${id}`, {
             method: 'DELETE',
-            headers: {
-                'API-KEY': API_KEY
-            }
         });
 
         if (!response.ok) {

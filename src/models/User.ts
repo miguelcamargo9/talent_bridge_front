@@ -8,8 +8,8 @@ export interface User {
 export interface BaseUser extends User {
     id: number;
     is_active: number;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string | null;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string | null;
 }
   

@@ -58,8 +58,8 @@ const Users: React.FC = () => {
         user.name.toLowerCase().includes(lowercasedQuery) ||
         user.email.toLowerCase().includes(lowercasedQuery) ||
         user.phone.toLowerCase().includes(lowercasedQuery) ||
-        formatDate(user.created_at).includes(lowercasedQuery) ||
-        formatDate(user.updated_at).includes(lowercasedQuery)
+        formatDate(user.createdAt).includes(lowercasedQuery) ||
+        formatDate(user.updatedAt).includes(lowercasedQuery)
       );
     });
   };
@@ -155,7 +155,6 @@ const Users: React.FC = () => {
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
             <th>Creation Date</th>
             <th>Update Date</th>
             <th>Actions</th>
@@ -166,9 +165,8 @@ const Users: React.FC = () => {
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.phone}</td>
-              <td>{formatDate(user.created_at)}</td>
-              <td>{formatDate(user.updated_at)}</td>
+              <td>{formatDate(user.createdAt)}</td>
+              <td>{formatDate(user.updatedAt)}</td>
               <td>
                 <button
                   onClick={() => handleEditUser(user.id)}
