@@ -1,10 +1,11 @@
 import { Opportunity } from '../models/Opportunity';
+import { fetchWithAuth } from './fetchWithAuth';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
 export const fetchOpportunities = async (): Promise<Opportunity[]> => {
     try {
-        const response = await fetch(`${BASE_URL}/opportunities`, {
+        const response = await fetchWithAuth(`${BASE_URL}/opportunities`, {
             method: 'GET',
         });
 

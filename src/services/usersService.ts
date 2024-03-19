@@ -22,7 +22,7 @@ export const fetchUsers = async (): Promise<BaseUser[]> => {
 
 export const fetchUser = async (id: number): Promise<User> => {
     try {
-        const response = await fetch(`${BASE_URL}/users/${id}`, {
+        const response = await fetch(`${BASE_URL}/user/profile/${id}`, {
             method: 'GET',
         });
 
