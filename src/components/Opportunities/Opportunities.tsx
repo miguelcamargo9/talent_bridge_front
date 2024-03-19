@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { deleteOpportunity, fetchOpportunities } from "../../services/opportunitiesService";
 import { Opportunity } from "../../models/Opportunity";
 import styles from "./Opportunities.module.scss";
-import layoutStyles from "../Layout/Layout.module.scss";
 import Search from "./Search/Search";
 import Pagination from "../Pagination/Pagination";
 import { useNavigate } from "react-router-dom";
@@ -111,10 +110,6 @@ const Opportunities: React.FC = () => {
     navigate(`/create`);
   };
 
-  const handleEditOpportunity = (opportunityId: number) => {
-    navigate(`/update/${opportunityId}`);
-  };
-
   const handleCloseAlert = () => {
     setAlertInfo({ message: "", type: null });
   };
@@ -167,14 +162,8 @@ const Opportunities: React.FC = () => {
               <td>{opportunity.updatedAt}</td>
               <td>
                 <button
-                  onClick={() => handleEditOpportunity(opportunity.id)}
-                  style={{ marginRight: "5px" }}
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => confirmDelete(opportunity.id)}
-                  className={`${layoutStyles.button} ${layoutStyles.secondary}`}
+                  onClick={() => confirmDelete(opportunity.id as number)}
+                  className="btn btn-danger"
                 >
                   Delete
                 </button>

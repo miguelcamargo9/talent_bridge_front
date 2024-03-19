@@ -19,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
       className={styles.searchInput}
       value={query}
       onChange={handleChange}
-      placeholder="Search Users"
+      placeholder="Search Opportunities..."
     />
   );
 };

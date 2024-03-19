@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Opportunity } from "../../models/Opportunity";
 import { fetchOpportunities, deleteOpportunity } from "../../services/opportunitiesService";
-import Person from "../../assets/person.png";
 import ModalConfirm from "../Modal/ModalConfirm";
 import Alert from "../Alert/Alert";
 
@@ -44,7 +43,7 @@ const OpportunitiesGrid = () => {
     } catch (error) {
       console.error(error);
       setAlertInfo({
-        message: "Opportunity could not be deleted",
+        message: "Opportunity is closed, you can't apply it.",
         type: "error",
       });
     }
@@ -77,7 +76,7 @@ const OpportunitiesGrid = () => {
           onConfirm={deleteConfirmed}
         >
           <h2 style={{ textAlign: "center" }}>Confirm</h2>
-          <p>¿You really want to delete the opportunity?</p>
+          <p>¿You really want to apply the opportunity?</p>
         </ModalConfirm>
       )}
       {alertInfo.type && (
@@ -96,10 +95,10 @@ const OpportunitiesGrid = () => {
                 <p className="card-text">{opportunity.description}</p>
                 <div className="d-flex justify-content-center">
                   <button
-                    className="btn btn-danger"
-                    onClick={() => confirmDelete(opportunity.id)}
+                    className="btn btn-warning"
+                    onClick={() => confirmDelete(opportunity.id as number)}
                   >
-                    Delete
+                    Apply
                   </button>
                 </div>
               </div>

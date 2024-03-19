@@ -41,12 +41,18 @@ export const fetchOpportunity = async (id: number): Promise<Opportunity> => {
 
 export const createOpportunity = async (opportunity: Opportunity): Promise<Opportunity> => {
     try {
-        const response = await fetch(`${BASE_URL}/opportunities`, {
+        const userData = localStorage.getItem('user');
+        const recluiterId = userData ? JSON.parse(userData).id : 1;
+        const opportunityInfo = {
+            ...opportunity,
+            recruiter_id: recluiterId,
+        };
+        const response = await fetchWithAuth(`${BASE_URL}/opportunity/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(opportunity)
+            body: JSON.stringify(opportunityInfo)
         });
 
         if (!response.ok) {
