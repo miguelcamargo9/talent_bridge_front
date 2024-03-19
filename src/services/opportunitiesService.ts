@@ -91,7 +91,7 @@ export const updateOpportunity = async (id: number, opportunity: Opportunity): P
 
 export const deleteOpportunity = async (id: number): Promise<void> => {
     try {
-        const response = await fetch(`${BASE_URL}/opportunities/${id}`, {
+        const response = await fetchWithAuth(`${BASE_URL}/opportunity/delete/${id}`, {
             method: 'DELETE',
         });
 

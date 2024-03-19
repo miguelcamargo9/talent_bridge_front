@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Opportunity } from "../../models/Opportunity";
-import { fetchOpportunities, deleteOpportunity } from "../../services/opportunitiesService";
+import { fetchOpportunities } from "../../services/opportunitiesService";
 import ModalConfirm from "../Modal/ModalConfirm";
 import Alert from "../Alert/Alert";
 
@@ -9,7 +9,6 @@ const OpportunitiesGrid = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
-  const [opportunityIdToDelete, setOpportunityIdToDelete] = useState<number | null>(null);
   const [alertInfo, setAlertInfo] = useState<{
     message: string;
     type: "success" | "error" | null;
@@ -30,29 +29,12 @@ const OpportunitiesGrid = () => {
     loadOpportunities();
   }, []);
 
-  const confirmDelete = (opportunityId: number) => {
+  const confirmDelete = () => {
     setShowConfirmModal(true);
-    setOpportunityIdToDelete(opportunityId);
-  };
-
-  const handleDeleteOpportunity = async (opportunityId: number) => {
-    try {
-      await deleteOpportunity(opportunityId);
-      await loadOpportunities();
-      setAlertInfo({ message: "Opportunity deleted successfully", type: "success" });
-    } catch (error) {
-      console.error(error);
-      setAlertInfo({
-        message: "Opportunity is closed, you can't apply it.",
-        type: "error",
-      });
-    }
   };
 
   const deleteConfirmed = async () => {
-    if (opportunityIdToDelete) {
-      await handleDeleteOpportunity(opportunityIdToDelete);
-    }
+    setAlertInfo({ message: "Opportunity applyed successfully", type: "success" });
     closeConfirmModal();
   };
 
@@ -96,7 +78,7 @@ const OpportunitiesGrid = () => {
                 <div className="d-flex justify-content-center">
                   <button
                     className="btn btn-warning"
-                    onClick={() => confirmDelete(opportunity.id as number)}
+                    onClick={() => confirmDelete()}
                   >
                     Apply
                   </button>
