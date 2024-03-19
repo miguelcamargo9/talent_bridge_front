@@ -8,9 +8,18 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
+  let user = '';
+  let role = '';
+
   const userData = localStorage.getItem('user');
-  const user = userData ? JSON.parse(userData).username : '';
-  const role = userData ? JSON.parse(userData).role : '';
+  if (userData && userData !== 'undefined') {
+    const parsedData = JSON.parse(userData);
+    user = parsedData.username || '';
+    role = parsedData.role || '';
+  } else {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('token');
